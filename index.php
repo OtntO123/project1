@@ -5,18 +5,13 @@ error_reporting(E_ALL | E_STRICT);
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
-
-//header("Content-type:application/csv");
-// It will be called downloaded.pdf
-//header("Content-Disposition:attachment;filename='Downloads.csv'");
-// The PDF source is in original.pdf
-//readfile("C.csv");
 if(isset($_GET["wn"])){
-	if($_GET["wn"] = 1){
-	echo "PLEASE CHOOSE FILE!!!";	
+	switch($_GET["wn"]){
+		case 1:
+			echo "PLEASE CHOOSE FILE!!!";	
+			break;
 	}
 }
-
 ?>
 
 <!DOCTYPE html>

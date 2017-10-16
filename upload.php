@@ -74,6 +74,7 @@ echo "<body>";
 echo "<div style='overflow-x:auto;'>";
 echo "<table style='width:100%'>
 <caption>" . $_FILES["fileToUpload"]["name"] . "</caption>";
+$appp = file($target_file);
 foreach($appp as $i => $k) {
         echo "<tr>";
         foreach(explode(",", $k) as $j) {
