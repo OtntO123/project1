@@ -6,20 +6,10 @@ header("Cache-Control: no-cache, must-revalidate");     //Don't use cache
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
 $target_dir = "CSVdata/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$target_file = $target_dir . $_FILES["fileToUpload"]["name"];
 $uploadOk = 1;
-//$CSVFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 $appp =file($_FILES["fileToUpload"]["tmp_name"]);
 
-
-//print_r($appp);
-//echo count($appp);
-
-//echo ( $fgetcsv($_FILES["fileToUpload"]["tmp_name"]));
-//print_r($content);
-
-//var_dump($content);
-// Check if image file is a actual image or fake image
 
 //if(isset($_POST["submit"])) {
 //	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -32,21 +22,22 @@ $appp =file($_FILES["fileToUpload"]["tmp_name"]);
 //	}
 //}
 
-// Check if file already exists
-//if (file_exists($target_file)) {
-//	echo "Sorry, file already exists.";
-//	$uploadOk = 0;
-//}
-//// Check file size
-//if ($_FILES["fileToUpload"]["size"] > 500000) {
-//	echo "Sorry, your file is too large.";
-//	$uploadOk = 0;
-//}
-//// Allow certain file formats
-//if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-//	echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-//	$uploadOk = 0;
-//}
+// Check file exists
+if (file_exists($target_file)) {
+	echo "File exists!";
+}
+
+// Check file size
+if ($_FILES["fileToUpload"]["size"] > 500000) {
+	echo "Sorry, your file is too large.";
+	$uploadOk = 0;
+}
+
+// Check file type
+if ($_FILES["fileToUpload"]["type"] != "text/csv" && $_FILES["fileToUpload"]["type"] != "text" && $_FILES["fileToUpload"]["type"] != "csv") {
+        echo "Sorry, only csv, text files are allowed.";
+        $uploadOk = 0;
+}
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
@@ -59,10 +50,37 @@ if ($uploadOk == 0) {
 	echo "Sorry, there was an error uploading your file.";
 	}
 }
-echo "<html>";
-echo "<body>";
-echo "<table style='width:100%'>";
 
+echo "<html>";
+echo "<head>
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+th {
+    background-color: Indigo;
+    color: white;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+tr:hover {background-color: LightSkyBlue}
+caption { 
+	display: table-caption;
+	text-align: center;
+	color: MidnightBlue;
+	font-size:200%;
+}
+</style>
+</head>";
+echo "<body>";
+echo "<div style='overflow-x:auto;'>";
+echo "<table style='width:100%'>
+<caption>" . $_FILES["fileToUpload"]["name"] . "</caption>";
 foreach($appp as $i => $k) {
         echo "<tr>";
         foreach(explode(",", $k) as $j) {
@@ -70,7 +88,7 @@ foreach($appp as $i => $k) {
         }
         echo "</tr>";
 }
-echo "</table>";
+echo "</table></div>";
 echo "</body>";
 echo "</html>";
 

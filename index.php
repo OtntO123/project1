@@ -31,7 +31,7 @@ $files = scandir($dir);
 //for($i=2;$i<count($files[]);$i++){
 
 //echo "</br>";
-print_r($files);
+//print_r($files);
 
 //class basic
 ?>
