@@ -11,19 +11,6 @@ $uploadOk = 1;
 //$CSVFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 $appp =file($_FILES["fileToUpload"]["tmp_name"]);
 
-echo "<html>";
-echo "<body>";
-echo "<table style='width:100%'>";
-for($i=0; $i<count($appp); $i++){
-	echo "<tr>";
-	foreach(explode(",", $appp[4]) as $j) {
-	echo "<td>$j</td>";
-	}
-	echo "</tr>";
-}
-echo "</table>";
-echo "</body>";
-echo "</html>";
 
 //print_r($appp);
 //echo count($appp);
@@ -62,16 +49,30 @@ echo "</html>";
 //}
 
 // Check if $uploadOk is set to 0 by an error
-//if ($uploadOk == 0) {
-//	echo "Sorry, your file was not uploaded.";
-//	// if everything is ok, try to upload file
-//} else {
-//	if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-//	echo "The file ". basename($_FILES["fileToUpload"]["name"]). " has been uploaded.";
-//	} else {
-//	echo "Sorry, there was an error uploading your file.";
-//	}
-//}
+if ($uploadOk == 0) {
+	echo "Sorry, your file was not uploaded.";
+	// if everything is ok, try to upload file
+} else {
+	if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+	echo "The file ". basename($_FILES["fileToUpload"]["name"]). " has been uploaded.";
+	} else {
+	echo "Sorry, there was an error uploading your file.";
+	}
+}
+echo "<html>";
+echo "<body>";
+echo "<table style='width:100%'>";
+
+foreach($appp as $i => $k) {
+        echo "<tr>";
+        foreach(explode(",", $k) as $j) {
+        echo ($i == 0) ? "<th>$j</th>" : "<td>$j</td>";
+        }
+        echo "</tr>";
+}
+echo "</table>";
+echo "</body>";
+echo "</html>";
 
 //header("Content-type:application/jpg");
 // It will be called downloaded.pdf
