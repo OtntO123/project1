@@ -5,12 +5,18 @@ error_reporting(E_ALL | E_STRICT);
 header("Cache-Control: no-cache, must-revalidate");     //Don't use cache
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 //var_dump( $_FILES["fileToUpload"]["name"]);
-if(!isset($_POST["submit"]) or $_FILES["fileToUpload"]["name"] == "") {
+if(!isset($_POST["submit"])) {
+	header('Location: index.php?wn=0');
+} else if($_FILES["fileToUpload"]["name"] == "" and $_POST["filename"] == "") {
 	header('Location: index.php?wn=1');
 }
 
 
+//print_r( $_POST["filename"]);
+
 $target_dir = "CSVdata/";
+
+if($_FILES["fileToUpload"]["name"] !== "") {
 $target_file = $target_dir . $_FILES["fileToUpload"]["name"];
 $uploadOk = 1;
 $appp =file($_FILES["fileToUpload"]["tmp_name"]);
@@ -43,6 +49,12 @@ if ($uploadOk == 0) {
 	echo "Sorry, there was an error uploading your file.";
 	}
 }
+
+} else {
+$target_file=$target_dir . $_POST["filename"];
+}
+
+
 
 echo "<html>";
 echo "<head>
