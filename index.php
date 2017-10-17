@@ -36,7 +36,7 @@ if(isset($_GET["wn"])){
 $files = scandir('CSVdata');
 echo "EXISTING FILEs:";
 for($i = 2; $i < count($files); $i++){
-	echo "</br>" . ($i-1) . "."  . $files[$i];
+	echo "</br>" . $files[$i];
 }
 //print_r($files);
 
