@@ -1,6 +1,6 @@
 <?php
 class upload2{
-	static public function upld() {
+	static public function upld() {	//upload form
 	$msg = '<body>';
 	$msg .= '<form action="index.php" method="post" enctype="multipart/form-data">';
 	$msg .= '<h1>Select CSV to upload: </h1>';
@@ -10,13 +10,13 @@ class upload2{
 	return $msg;
 	}
 
-	static public function check() {
+	static public function check() {	//check and upload file
 
-		if(isset($_FILES["fileToUpload"]["name"])) {
-			if($_FILES["fileToUpload"]["name"] == "") {
-				header('Location: index.php?wn=1');
+		if(isset($_FILES["fileToUpload"]["name"])) {	//check whether there is a file posted
+			if($_FILES["fileToUpload"]["name"] == "") {	//check file name
+				header('Location: index.php?wn=1');	//return error code in errmsg.php
 			} else {
-				$target_file = "CSVdata/" . $_FILES["fileToUpload"]["name"];			
+				$target_file = "CSVdata/" . $_FILES["fileToUpload"]["name"];	//set path			
 
 				//// Check file exists
 				//if (file_exists($target_file)) {

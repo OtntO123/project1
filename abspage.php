@@ -1,5 +1,5 @@
 <?php
-abstract class abspage {
+abstract class abspage {	//abstract class
 	protected $html;
 
 	public function __construct()
@@ -10,13 +10,12 @@ abstract class abspage {
 	public function __destruct()
 	{
 		$this->html .= '</html>';
-		echo $this->html;
-		//var_dump($this->html);
+		echo $this->html;	//echo all http code
 	}
 
-	public function post() {}
+	public function post() {}	//select one to run based on GET or POST
 
-	public function get() {}
+	public function get() {}	//select one to run
 }
 
 

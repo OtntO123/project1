@@ -1,27 +1,21 @@
 <?php
-class main {
+class main {	//check whether to read csv through _GET['csv'], or display homepage and check whether to upload file through _POST[]
 
     public function __construct()
     {
-        //print_r($_REQUEST);
-        //set default page request when no parameters are in URL
-        $pageRequest = 'defaultpage';
-        //check if there are parameters
-        if(isset($_GET['csv'])) {
-            //load the type of page the request wants into page request
-            $pageRequest = 'readcsvpage';
-        }
-        //instantiate the class that is being requested
-         $abspage = new $pageRequest;
+        $pageRequest = 'defaultpage';	//choose default extent home page class
 
-        if(isset($_GET['csv'])) {
+        if(isset($_GET['csv'])) {	//check whether csv filename in url parameter
+            $pageRequest = 'readcsvpage';	//choose extent classs to read csv ile
+        }
+
+         $abspage = new $pageRequest;	//initiate class
+
+        if(isset($_GET['csv'])) {	//choose function in abstract class
             $abspage->get();
         } else {
             $abspage->post();
         }
-	//echo $pageRequest;
-	//print_r($_GET);
     }
-
 }
 

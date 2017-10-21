@@ -1,5 +1,5 @@
 <?php
-class errmsg {
+class errmsg {	//error message
 	static public function Err($er){	
 		//echo $er;
 		switch($er){

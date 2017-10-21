@@ -1,12 +1,12 @@
 <?php
-class showcsv {
-	static public function getform() {
+class showcsv {	//display csv files
+	static public function getform($folder) {	//display get csv form
 	$form = '<body>';
 	$form .= '<form action="index.php" method="get">';
 	$form .= '<hr><h1>Choose file to load: </h1>';
 	$form .= '<select name="csv">';
-	$files = scandir('CSVdata');
-	for($i = 2; $i < count($files); $i++){
+	$files = scandir($folder);
+	for($i = 2; $i < count($files); $i++){	//drop box scan files
 		$form .= $files[$i] ;
 		$form .= "<option value=\"$files[$i]\">$files[$i]</option>";
 	}
@@ -15,7 +15,7 @@ class showcsv {
 	return $form;
 	}
 
-	static public function csv($filename) {		
+	static public function csv($filename) {		//display csv file
 		$string = '';		
 		$target_file = 'CSVdata/' . $filename;
 
@@ -48,9 +48,9 @@ class showcsv {
 		$string .= "<div style='overflow-x:auto;'>";
 		$string .= "<table style='width:100%'><caption>" . $filename . "</caption>";
 		$appp = file($target_file);
-		foreach($appp as $i => $k) {
+		foreach($appp as $i => $k) {	
 			$string .= "<tr>";
-			foreach(explode(",", $k) as $j) {
+			foreach(explode(",", $k) as $j) {	//split data
 				$string .= ($i == 0) ? "<th>$j</th>" : "<td>$j</td>";
         		}
         		$string .= "</tr>";
